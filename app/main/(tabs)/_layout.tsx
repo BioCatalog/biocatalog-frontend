@@ -1,14 +1,14 @@
 import Header from '@/components/layout/header';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs, router } from 'expo-router';
+import { Tabs } from 'expo-router';
 import React from 'react';
 
 export default function TabLayout() {
   return (
     <Tabs
-      // backBehavior='history'
+      backBehavior='history'
       screenOptions={{
-        header: ({ }) => (<Header title={''} />),
+        header: ({ options }) => (<Header title={options.title} />),
         headerTintColor: 'white',
         tabBarActiveTintColor: '#27AE60',
         tabBarInactiveTintColor: 'black',
@@ -32,14 +32,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="newRecord"
         options={{
-          title: 'Novo registro',
-          tabBarIcon: () => <FontAwesome size={50} name="plus-circle" color={'#659867'} style={{ zIndex: 1, position: 'absolute' }} />,
+          title: 'Registrar',
+          tabBarIconStyle: { width: 48 },
+          tabBarIcon: ({ focused, color }) => <FontAwesome size={48} name={"plus-circle"} color={focused ? color : '#659867'} style={{ marginBottom: 10, height: 48 }} />,
         }}
       />
       <Tabs.Screen
         name="collection"
         options={{
-          title: 'Nova coleção',
+          title: 'Coleção',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="bookmark" color={color} />,
         }}
       />
