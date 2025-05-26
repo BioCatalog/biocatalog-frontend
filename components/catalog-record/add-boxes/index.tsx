@@ -3,7 +3,6 @@ import { Icon, TrashIcon } from "@/components/ui/icon";
 import FontAwesome from "@expo/vector-icons/FontAwesome"
 import { ScrollView, View, StyleSheet, Image } from "react-native"
 import { Dimensions } from 'react-native';
-
 import * as FileSystem from 'expo-file-system'
 import { Dispatch, SetStateAction } from "react";
 

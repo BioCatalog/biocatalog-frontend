@@ -2,7 +2,6 @@ import { View, StyleSheet } from "react-native";
 import SelectOptionsSpecies from "../select-options-species";
 import StyledInput from "@/components/styled-input";
 import { useState, useEffect } from "react";
-
 import * as Location from 'expo-location';
 import CurrentMaps from "../maps";
 import { RecordProps } from "@/interfaces";

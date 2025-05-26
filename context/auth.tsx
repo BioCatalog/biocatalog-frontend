@@ -71,7 +71,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
         if (wAccount == true) {
             setData({ ...data, email: 'local', name: 'local', form: 'local' });
             setIsLogged(true);
-            router.replace('/main/(tabs)/');
+            router.replace('/main/(tabs)');
             return;
         }
 
@@ -86,7 +86,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
                 await SecureStore.setItemAsync('token', res.data.token);
 
                 setIsLogged(true);
-                router.replace('/main/(tabs)/');
+                router.replace('/main/(tabs)');
             })
             .catch((err) => {
                 if (err.status) {
@@ -128,7 +128,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
         const authorization = await SecureStore.getItemAsync('token');
 
         await api.put('/auth/updateUser',
-            { name: user.name ?? data.name, form: user.form ?? data.form, email: user.email ?? data.email}, { headers: { authorization } })
+            { name: user.name ?? data.name, form: user.form ?? data.form, email: user.email ?? data.email }, { headers: { authorization } })
             .then((res) => {
                 if (res.status == 200) {
                     Alert.alert('Sucesso', 'Usuário editado com sucesso!');

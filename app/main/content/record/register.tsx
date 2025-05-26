@@ -2,11 +2,9 @@ import { router } from "expo-router";
 import { useState, useEffect } from "react";
 import { StyleSheet, ToastAndroid, View } from "react-native";
 import PhotoBox from "@/components/catalog-record/add-boxes";
-import StyledButton from "@/components/styled-button";
 import CatalogInputs from "@/components/catalog-record/inputs";
 import { ScrollView } from "react-native";
 import Camera from "./newImage";
-
 import * as FileSystem from 'expo-file-system'
 import { RecordProps } from "@/interfaces";
 import { useRecordDatabase } from "@/database/useRecordDatabase";

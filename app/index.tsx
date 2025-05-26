@@ -20,7 +20,7 @@ export default function Login() {
                 Cadastre-se <Text style={{ fontWeight: "bold", color: "green" }}>AQUI!</Text>
             </Text>
             <View style={{ marginTop: 40 }}>
-                <Text underline={true} onPress={() => { router.replace('/main/(tabs)/'); auth.handleLogin(true); }}>
+                <Text underline={true} onPress={() => { router.replace('/main/(tabs)'); auth.handleLogin(true); }}>
                     Ou continuar sem conta
                 </Text>
             </View>
