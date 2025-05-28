@@ -5,6 +5,7 @@ import initializeDatabase, { refactorDatabase } from "@/database/initializeDatab
 import { AuthProvider, useAuth } from "@/context/auth";
 import { useEffect } from "react";
 import "@/global.css";
+import { StatusBar } from "react-native";
 
 export default function Layout() {
     const auth = useAuth();
@@ -15,6 +16,7 @@ export default function Layout() {
         <GluestackUIProvider>
             <SQLiteProvider databaseName="biocatalog.db" onInit={initializeDatabase}>
                 <AuthProvider>
+                    <StatusBar animated={true} backgroundColor='#083E03' barStyle={"dark-content"} hidden />
                     <Slot />
                 </AuthProvider>
             </SQLiteProvider>

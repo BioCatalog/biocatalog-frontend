@@ -37,7 +37,7 @@ export default function StyledInput({ label, helper, placeholder, type, options,
 
                         type == 'select-options' ?
                             <Select onValueChange={onChangeText} onOpen={onClick}>
-                                <SelectTrigger variant="outline" size="md" style={{ justifyContent: 'space-between' }}>
+                                <SelectTrigger variant="rounded" size="md" style={{ justifyContent: 'space-between' }}>
                                     <SelectInput placeholder={placeholder} />
                                     <SelectIcon className="mr-3" as={ChevronDownIcon} />
                                 </SelectTrigger>
@@ -47,7 +47,6 @@ export default function StyledInput({ label, helper, placeholder, type, options,
                                         <SelectDragIndicatorWrapper>
                                             <SelectDragIndicator />
                                         </SelectDragIndicatorWrapper>
-
                                         {
                                             options?.map((option) => (
                                                 <SelectItem key={option.id} label={option.name} value={option.id} />

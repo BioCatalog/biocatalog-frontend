@@ -33,7 +33,7 @@ export default function CatalogInputs({ record, setRecord }: CatalogInputsProps)
 
             setRecord({ ...record, local, createDate: date });
         })();
-    }, []);
+    }, [location]);
 
     function handleChangeOption(value: string) {
         setRecord({ ...record, catalog: value });

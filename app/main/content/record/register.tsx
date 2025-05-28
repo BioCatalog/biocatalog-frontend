@@ -26,6 +26,7 @@ export default function RegisterSpecie() {
                 ToastAndroid.showWithGravity('Evidencia registrada!', ToastAndroid.SHORT, ToastAndroid.TOP);
                 router.replace('/main/(tabs)/catalog');
             }).catch((e) => {
+                console.log(e);
                 ToastAndroid.showWithGravity('Não foi possível registrar' + e, ToastAndroid.SHORT, ToastAndroid.TOP);
             }).finally(() => {
                 clearRecord();
@@ -55,10 +56,10 @@ export default function RegisterSpecie() {
     return (
         cameraVisible ?
             <Camera photoIndex={photo.length} setPhotos={setPhoto} onCancel={handleCameraVisible} />
-            :
-            <View style={styles.container}>
-                { }
 
+            :
+
+            <View style={styles.container}>
                 <ScrollView style={styles.scrollView}>
                     <PhotoBox photosURL={photo} setPhotos={setPhoto} onAdd={handleCameraVisible} />
                     <CatalogInputs record={record} setRecord={setRecord} />
@@ -67,7 +68,6 @@ export default function RegisterSpecie() {
                 <View style={styles.optionsView}>
                     <StyledConfirmation firClick={handleCancel} firLabel="Cancelar" secClick={handleRegister} secLabel="Registrar" />
                 </View>
-
             </View>
     )
 }

@@ -1,47 +1,30 @@
 'use client';
 import { createSlider } from '@gluestack-ui/slider';
 import { Pressable } from 'react-native';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import { tva } from '@gluestack-ui/nativewind-utils/tva';
 import {
   withStyleContext,
   useStyleContext,
 } from '@gluestack-ui/nativewind-utils/withStyleContext';
-import { withStyleContextAndStates } from '@gluestack-ui/nativewind-utils/withStyleContextAndStates';
-import { cssInterop } from 'nativewind';
-import { withStates } from '@gluestack-ui/nativewind-utils/withStates';
 import type { VariantProps } from '@gluestack-ui/nativewind-utils';
-
-const ThumbWrapper = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentProps<typeof View>
->((props, ref) => <View ref={ref} {...props} />);
-
-const FilledTrackWrapper = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentProps<typeof View>
->((props, ref) => <View ref={ref} {...props} />);
+import { cssInterop } from 'nativewind';
 
 const SCOPE = 'SLIDER';
+const Root = withStyleContext(View, SCOPE);
 export const UISlider = createSlider({
-  Root:
-    Platform.OS === 'web'
-      ? withStyleContext(View, SCOPE)
-      : withStyleContextAndStates(View, SCOPE),
-  Thumb: Platform.OS === 'web' ? ThumbWrapper : withStates(View),
+  Root: Root,
+  Thumb: View,
   Track: Pressable,
-  FilledTrack: Platform.OS === 'web' ? FilledTrackWrapper : withStates(View),
+  FilledTrack: View,
   ThumbInteraction: View,
 });
 
-cssInterop(UISlider, { className: 'style' });
-cssInterop(ThumbWrapper, { className: 'style' });
 cssInterop(UISlider.Track, { className: 'style' });
-cssInterop(FilledTrackWrapper, { className: 'style' });
 
 const sliderStyle = tva({
-  base: 'justify-center items-center data-[disabled=true]:web:opacity-40 data-[disabled=true]:web:pointer-events-none',
+  base: 'justify-center items-center data-[disabled=true]:opacity-40 data-[disabled=true]:web:pointer-events-none',
   variants: {
     orientation: {
       horizontal: 'w-full',
@@ -60,7 +43,7 @@ const sliderStyle = tva({
 });
 
 const sliderThumbStyle = tva({
-  base: 'bg-primary-500 absolute rounded-full data-[focus=true]:bg-primary-600 data-[active=true]:bg-primary-600 data-[hover=true]:bg-primary-600 data-[disabled=true]:bg-primary-500 web:cursor-pointer web:active:outline-4 web:active:outline web:active:outline-primary-400 data-[focus=true]:web:outline-4 data-[focus=true]:web:outline data-[focus=true]:web:outline-primary-400 shadow-hard-1',
+  base: 'bg-primary-500 absolute rounded-full data-[focus=true]:bg-primary-600 data-[active=true]:bg-primary-600 data-[hover=true]:bg-primary-600 data-[disabled=true]:bg-primary-500 web:cursor-pointer web:data-[active=true]:outline web:data-[active=true]:outline-4 web:data-[active=true]:outline-primary-400 shadow-hard-1',
 
   parentVariants: {
     size: {
@@ -171,49 +154,46 @@ const sliderFilledTrackStyle = tva({
 type ISliderProps = React.ComponentProps<typeof UISlider> &
   VariantProps<typeof sliderStyle>;
 
-export const Slider = React.forwardRef<
-  React.ElementRef<typeof UISlider>,
+const Slider = React.forwardRef<
+  React.ComponentRef<typeof UISlider>,
   ISliderProps
->(
-  (
-    {
-      className,
-      size = 'md',
-      orientation = 'horizontal',
-      isReversed = false,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <UISlider
-        ref={ref}
-        isReversed={isReversed}
-        orientation={orientation}
-        {...props}
-        className={sliderStyle({
-          orientation,
-          isReversed,
-          class: className,
-        })}
-        context={{ size, orientation, isReversed }}
-      />
-    );
-  }
-);
+>(function Slider(
+  {
+    className,
+    size = 'md',
+    orientation = 'horizontal',
+    isReversed = false,
+    ...props
+  },
+  ref
+) {
+  return (
+    <UISlider
+      ref={ref}
+      isReversed={isReversed}
+      orientation={orientation}
+      {...props}
+      className={sliderStyle({
+        orientation,
+        isReversed,
+        class: className,
+      })}
+      context={{ size, orientation, isReversed }}
+    />
+  );
+});
 
 type ISliderThumbProps = React.ComponentProps<typeof UISlider.Thumb> &
   VariantProps<typeof sliderThumbStyle>;
 
-export const SliderThumb = React.forwardRef<
-  React.ElementRef<typeof UISlider.Thumb>,
+const SliderThumb = React.forwardRef<
+  React.ComponentRef<typeof UISlider.Thumb>,
   ISliderThumbProps
->(({ className, size, ...props }, ref) => {
+>(function SliderThumb({ className, size, ...props }, ref) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
     <UISlider.Thumb
-      //@ts-ignore
       ref={ref}
       {...props}
       className={sliderThumbStyle({
@@ -230,10 +210,10 @@ export const SliderThumb = React.forwardRef<
 type ISliderTrackProps = React.ComponentProps<typeof UISlider.Track> &
   VariantProps<typeof sliderTrackStyle>;
 
-export const SliderTrack = React.forwardRef<
-  React.ElementRef<typeof UISlider.Track>,
+const SliderTrack = React.forwardRef<
+  React.ComponentRef<typeof UISlider.Track>,
   ISliderTrackProps
->(({ className, ...props }, ref) => {
+>(function SliderTrack({ className, ...props }, ref) {
   const {
     orientation: parentOrientation,
     size: parentSize,
@@ -261,15 +241,14 @@ type ISliderFilledTrackProps = React.ComponentProps<
 > &
   VariantProps<typeof sliderFilledTrackStyle>;
 
-export const SliderFilledTrack = React.forwardRef<
-  React.ElementRef<typeof UISlider.FilledTrack>,
+const SliderFilledTrack = React.forwardRef<
+  React.ComponentRef<typeof UISlider.FilledTrack>,
   ISliderFilledTrackProps
->(({ className, ...props }, ref) => {
+>(function SliderFilledTrack({ className, ...props }, ref) {
   const { orientation: parentOrientation } = useStyleContext(SCOPE);
 
   return (
     <UISlider.FilledTrack
-      //@ts-ignore
       ref={ref}
       {...props}
       className={sliderFilledTrackStyle({
@@ -281,3 +260,5 @@ export const SliderFilledTrack = React.forwardRef<
     />
   );
 });
+
+export { Slider, SliderThumb, SliderTrack, SliderFilledTrack };
