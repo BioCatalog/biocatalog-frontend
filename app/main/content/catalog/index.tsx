@@ -22,9 +22,7 @@ export default function CatalogDetails() {
             <Button
                 onPress={() => { router.back(); }}
                 style={{ alignSelf: 'flex-start', backgroundColor: 'transparent', position: 'absolute', zIndex: 1 }}>
-                <ButtonIcon>
-                    <Icon as={ArrowLeftIcon} size='lg' color="black" />
-                </ButtonIcon>
+                <ButtonIcon as={ArrowLeftIcon} size='lg' color="black" />
             </Button>
 
             <ScrollView contentContainerStyle={styles.contentContainer}>

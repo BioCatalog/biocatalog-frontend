@@ -37,9 +37,7 @@ export default function SelectOptionsSpecies({ onChange }: SOSpeciesProps) {
                 <StyledInput type="select-options" label="Especie" options={options} onChangeText={onChange} placeholder="Selecione a Especie" />
             </View>
             <Button size="lg" className="rounded-full p-3.5" style={styles.addButon} onPress={() => { router.navigate('/main/(tabs)/collection') }}>
-                <ButtonIcon>
-                    <Icon as={AddIcon} />
-                </ButtonIcon>
+                <ButtonIcon as={AddIcon} color="black" className="text-typography-black" />
             </Button>
         </View >
     )

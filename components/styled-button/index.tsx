@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Button, ButtonSpinner, ButtonText } from "../ui/button";
-import { InterfaceButtonProps } from "@gluestack-ui/button/lib/typescript/types";
+import { InterfaceButtonProps } from "@gluestack-ui/button/lib/types";
 
 interface StyledButtonProps extends InterfaceButtonProps {
     text: string,

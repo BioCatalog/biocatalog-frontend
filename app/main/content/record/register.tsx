@@ -2,11 +2,9 @@ import { router } from "expo-router";
 import { useState, useEffect } from "react";
 import { StyleSheet, ToastAndroid, View } from "react-native";
 import PhotoBox from "@/components/catalog-record/add-boxes";
-import StyledButton from "@/components/styled-button";
 import CatalogInputs from "@/components/catalog-record/inputs";
 import { ScrollView } from "react-native";
 import Camera from "./newImage";
-
 import * as FileSystem from 'expo-file-system'
 import { RecordProps } from "@/interfaces";
 import { useRecordDatabase } from "@/database/useRecordDatabase";
@@ -28,6 +26,7 @@ export default function RegisterSpecie() {
                 ToastAndroid.showWithGravity('Evidencia registrada!', ToastAndroid.SHORT, ToastAndroid.TOP);
                 router.replace('/main/(tabs)/catalog');
             }).catch((e) => {
+                console.log(e);
                 ToastAndroid.showWithGravity('Não foi possível registrar' + e, ToastAndroid.SHORT, ToastAndroid.TOP);
             }).finally(() => {
                 clearRecord();
@@ -57,10 +56,10 @@ export default function RegisterSpecie() {
     return (
         cameraVisible ?
             <Camera photoIndex={photo.length} setPhotos={setPhoto} onCancel={handleCameraVisible} />
-            :
-            <View style={styles.container}>
-                { }
 
+            :
+
+            <View style={styles.container}>
                 <ScrollView style={styles.scrollView}>
                     <PhotoBox photosURL={photo} setPhotos={setPhoto} onAdd={handleCameraVisible} />
                     <CatalogInputs record={record} setRecord={setRecord} />
@@ -69,7 +68,6 @@ export default function RegisterSpecie() {
                 <View style={styles.optionsView}>
                     <StyledConfirmation firClick={handleCancel} firLabel="Cancelar" secClick={handleRegister} secLabel="Registrar" />
                 </View>
-
             </View>
     )
 }

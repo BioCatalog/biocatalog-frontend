@@ -2,7 +2,6 @@ import { View, StyleSheet } from "react-native";
 import SelectOptionsSpecies from "../select-options-species";
 import StyledInput from "@/components/styled-input";
 import { useState, useEffect } from "react";
-
 import * as Location from 'expo-location';
 import CurrentMaps from "../maps";
 import { RecordProps } from "@/interfaces";
@@ -34,7 +33,7 @@ export default function CatalogInputs({ record, setRecord }: CatalogInputsProps)
 
             setRecord({ ...record, local, createDate: date });
         })();
-    }, []);
+    }, [location]);
 
     function handleChangeOption(value: string) {
         setRecord({ ...record, catalog: value });

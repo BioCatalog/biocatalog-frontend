@@ -22,7 +22,7 @@ export default function EditPass() {
 
             <View style={style.buttonRow}>
                 <StyledButton style={style.saveButton} onClick={() => auth.handleChangePass(oldPass, newPass)} text="Salvar" color="#297d28" />
-                <StyledButton style={style.cancelButton} onClick={() => { router.replace('/main/content/editProfile/') }} text="Cancelar" color="#469158" />
+                <StyledButton style={style.cancelButton} onClick={() => { router.replace('/main/content/editProfile') }} text="Cancelar" color="#469158" />
             </View>
         </ScrollView>
     )
