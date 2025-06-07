@@ -11,9 +11,10 @@ import { View } from "react-native";
 
 interface SOSpeciesProps {
     onChange: (text: string) => void
+    value?: string
 }
 
-export default function SelectOptionsSpecies({ onChange }: SOSpeciesProps) {
+export default function SelectOptionsSpecies({ onChange, value }: SOSpeciesProps) {
     const [options, setOptions] = useState<Array<{ name: string, id: string }>>([]);
     const catalog = useCatalogDatabase();
     const auth = useAuth();
@@ -34,7 +35,7 @@ export default function SelectOptionsSpecies({ onChange }: SOSpeciesProps) {
     return (
         <View style={styles.container}>
             <View style={styles.select_input_container}>
-                <StyledInput type="select-options" label="Especie" options={options} onChangeText={onChange} placeholder="Selecione a Especie" />
+                <StyledInput type="select-options" label="Especie" value={value} options={options} onChangeText={onChange} placeholder="Selecione a Especie" />
             </View>
             <Button size="lg" className="rounded-full p-3.5" style={styles.addButon} onPress={() => { router.navigate('/main/(tabs)/collection') }}>
                 <ButtonIcon as={AddIcon} color="black" className="text-typography-black" />

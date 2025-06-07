@@ -13,12 +13,13 @@ interface StyledInputProps {
     onClick?: () => void
     type: 'text' | 'password' | 'select-options' | 'text-area'
     options?: Array<{ name: string, id: string }>
+    value?: string
     defaultValue?: string
     isRead?: boolean
     helper?: string
 }
 
-export default function StyledInput({ label, helper, placeholder, type, options, onChangeText, onClick, defaultValue, isRead }: StyledInputProps) {
+export default function StyledInput({ label, helper, placeholder, type, options, onChangeText, onClick, value, defaultValue, isRead }: StyledInputProps) {
     return (
         <VStack space="xs">
             <StyledFormControl label={label} helper={helper}>
@@ -38,7 +39,7 @@ export default function StyledInput({ label, helper, placeholder, type, options,
                         type == 'select-options' ?
                             <Select onValueChange={onChangeText} onOpen={onClick}>
                                 <SelectTrigger style={{ height: 'auto' }}>
-                                    <SelectInput placeholder={placeholder} className="flex-1" />
+                                    <SelectInput placeholder={placeholder} className="flex-1" defaultValue={value} />
                                     <SelectIcon className="mr-3" as={ChevronDownIcon} />
                                 </SelectTrigger>
                                 <SelectPortal>
@@ -59,7 +60,7 @@ export default function StyledInput({ label, helper, placeholder, type, options,
                             :
 
                             <Textarea size="md">
-                                <TextareaInput defaultValue={defaultValue} onChangeText={onChangeText} placeholder={placeholder} />
+                                <TextareaInput defaultValue={defaultValue} value={value} onChangeText={onChangeText} placeholder={placeholder} />
                             </Textarea>
                 }
             </StyledFormControl>

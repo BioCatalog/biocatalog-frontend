@@ -6,7 +6,7 @@ import StyledButton from "@/components/styled-button";
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from "@/components/ui/slider";
 interface CameraProps {
     onCancel: () => void
-    setPhotos: React.Dispatch<React.SetStateAction<string[]>>
+    setPhotos: (photoURL: string) => void //React.Dispatch<React.SetStateAction<string[]>>
     photoIndex: number
 }
 
@@ -49,7 +49,8 @@ export default function Camera({ onCancel, setPhotos, photoIndex }: CameraProps)
             from: tempPhoto,
             to: photoFileName
         }).then(async () => {
-            setPhotos((photos) => [...photos, photoFileName]);
+            // setPhotos((photos) => [...photos, photoFileName]);
+            setPhotos(photoFileName);
             onCancel();
         });
     }

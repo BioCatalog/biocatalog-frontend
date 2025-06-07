@@ -10,6 +10,7 @@ export default function CurrentMaps({ location }: MapsProps) {
     return (
         <>
             <MapView
+                loadingEnabled={true}
                 style={styles.map}
                 zoomEnabled={false}
                 scrollEnabled={false}

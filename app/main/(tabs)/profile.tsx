@@ -25,7 +25,7 @@ export default function Profile() {
                             secClick={() => { router.navigate("/") }} secLabel="Login" secColor="blue" />
                         :
                         <View style={style.buttonRow}>
-                            <StyledButton style={style.editButton} onClick={() => { router.replace('/main/content/editProfile/') }} text="Editar perfil" color="#297d28" />
+                            <StyledButton style={style.editButton} onClick={() => { router.replace('/main/content/editProfile') }} text="Editar perfil" color="#297d28" />
                             <StyledButton style={style.exitButton} onClick={auth.handleLogout} text="Sair" color="#A41718" />
                         </View>
                 }

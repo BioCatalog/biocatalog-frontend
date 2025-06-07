@@ -5,6 +5,7 @@ import { ScrollView, View, StyleSheet, Image } from "react-native"
 import { Dimensions } from 'react-native';
 import * as FileSystem from 'expo-file-system'
 import { Dispatch, SetStateAction } from "react";
+import { colorScheme } from "nativewind";
 
 interface PhotoBoxProps {
     photosURL: string[]
@@ -14,7 +15,7 @@ interface PhotoBoxProps {
 
 export default function PhotoBox({ photosURL, onAdd, setPhotos }: PhotoBoxProps) {
     async function erasePhoto(url: string) {
-        const file = await FileSystem.deleteAsync(url, { idempotent: true })
+        await FileSystem.deleteAsync(url, { idempotent: true })
             .then(() => {
                 const newPhotos = photosURL.filter((item) => item !== url);
                 setPhotos(newPhotos);
@@ -36,12 +37,11 @@ export default function PhotoBox({ photosURL, onAdd, setPhotos }: PhotoBoxProps)
                     <View key={index} style={style.box}>
                         <Button
                             onPress={() => { erasePhoto(photoUrl) }}
-                            style={{ zIndex: 1, alignSelf: 'flex-end', borderRadius: 5, aspectRatio: 1, backgroundColor: 'red', position: 'absolute' }}>
-                            <ButtonIcon>
-                                <Icon as={TrashIcon}
-                                    size={'lg'}
-                                    color="black" />
-                            </ButtonIcon>
+                            style={{ zIndex: 1, margin: 5, alignSelf: 'flex-end', borderRadius: 10, aspectRatio: 1, backgroundColor: 'red', position: 'absolute' }}>
+                            <ButtonIcon
+                                as={TrashIcon}
+                                size={'lg'}
+                                stroke={"black"} />
                         </Button>
                         <Image source={{ uri: photoUrl }} style={style.image} />
                     </View>
